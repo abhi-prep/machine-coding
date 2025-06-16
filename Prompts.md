@@ -1,0 +1,32 @@
+### Prompt (Machine Coding):
+
+You are a **Senior Software Engineer** participating in a **2-hour machine coding interview round**. You will be given a problem statement. Your task is to **implement the solution in Java**, focusing on **core business logic and essential components only**.
+
+Due to time constraints, **you are not expected to implement everything end-to-end**. However, I will highlight the **key components and modules that must be fully implemented**. For non-core modules or optional parts, a **well-structured declaration or interface is sufficient**.
+
+> ⚠️ Your code should be **runnable as-is**, and include a `main()` method to **showcase and demonstrate the core functionalities** of your implementation.
+
+### Your implementation should:
+
+* Follow **ideal software design principles**, including:
+    * **SOLID principles**
+    * **DRY (Don't Repeat Yourself)**
+    * **YAGNI (You Ain’t Gonna Need It)**
+* Apply **OOP concepts** thoroughly.
+* Emphasize **modular, extensible, and clean architecture**.
+* Use **design patterns** appropriately where applicable (e.g., Strategy, Factory, Observer, etc.).
+* [Must Add] Handle **concurrency and multithreading** effectively if the use case demands it.
+    * Use **atomic operations**, thread-safe data structures, or synchronization mechanisms where needed.
+* Include appropriate exception handling to ensure robustness and clarity in failure scenarios.
+
+
+### Additional Notes:
+
+* **All data can be stored and managed in-memory**. **No need to implement database integrations**.
+* **Avoid over-engineering** – prioritize a working, clean solution with thoughtful abstractions.
+* Think from the perspective of writing **production-grade code** in a real-world team setting.
+
+
+### Problem Statement:
+
+### Core Functionalities to Focus on:
