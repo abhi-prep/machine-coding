@@ -18,11 +18,14 @@ Due to time constraints, **you are not expected to implement everything end-to-e
   - Use **atomic operations**, thread-safe data structures, or synchronization mechanisms where needed.
 - [Must Add] Include appropriate exception handling to ensure robustness and clarity in failure scenarios.
 - [Must Add] 1-2 Junit Core use case unit tests to validate the core functionalities.
+- [Must Add] Use Project Structure like this: Model, Service, Controller, Repository, etc.
 
-### Additional Notes:
+### Additional Notes (Very Important):
 
+- Don't create a single bloated service or class. **Break down the code into smaller, manageable components**.
 - **All data can be stored and managed in-memory**. **No need to implement database integrations**.
 - **Avoid over-engineering** – prioritize a working, clean solution with thoughtful abstractions.
+- Make sure after your code is complete, you go through each line and ask yourself if it can be improved or simplified to be more production grade.
 - Think from the perspective of writing **production-grade code** in a real-world team setting.
 - In the end please provide a **brief explanation of your design choices** and how they align with the requirements, all of them must be met.
 

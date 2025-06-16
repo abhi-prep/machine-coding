@@ -71,8 +71,8 @@ public class RideService {
     public void cancelBooking(String bookingId) {
         Booking b = bookingRepo.findById(bookingId)
                 .orElseThrow(() -> new BookingNotFoundException(bookingId));
+        bookingRepo.delete(bookingId);
         b.getRide().cancelSeat();
-        // could remove from repo or mark canceled
     }
 
     public List<Booking> getHistory(String personId) {

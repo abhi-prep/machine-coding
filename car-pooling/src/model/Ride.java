@@ -44,13 +44,10 @@ public class Ride {
      * Try to book one seat atomically. Returns true if successful.
      */
     public boolean bookSeat() {
-        while (true) {
-            int current = availableSeats.get();
-            if (current <= 0) return false;
-            if (availableSeats.compareAndSet(current, current - 1)) {
-                return true;
-            }
-        }
+        return availableSeats.getAndUpdate(current -> {
+            if (current <= 0) return current; // no change
+            return current - 1;
+        }) > 0;
     }
 
     public void cancelSeat() {

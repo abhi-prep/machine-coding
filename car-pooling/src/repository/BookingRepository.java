@@ -12,4 +12,5 @@ public class BookingRepository implements Repository<String, Booking> {
     public void save(Booking b) { store.put(b.getBookingId(), b); }
     public Optional<Booking> findById(String id) { return Optional.ofNullable(store.get(id)); }
     public Collection<Booking> findAll() { return store.values(); }
+    public void delete(String id){ store.remove(id); }
 }
