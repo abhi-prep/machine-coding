@@ -1,15 +1,40 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import model.Booking;
+import model.Person;
+import model.Ride;
+import service.RideService;
+
+
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+        RideService svc = new RideService();
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        // register users
+        Person alice = svc.registerPerson("Alice");
+        Person bob   = svc.registerPerson("Bob");
+        Person eve   = svc.registerPerson("Eve");
+
+        // Alice and Bob offer rides
+        Ride r1 = svc.offerRide(alice.getPersonId(), 12.96,77.59, 12.98,77.60, 3);
+        Ride r2 = svc.offerRide(bob.getPersonId(),   12.97,77.58, 12.99,77.61, 2);
+
+        // Eve searches nearby
+        var nearby = svc.findNearbyRides(eve.getPersonId(), 12.965, 77.585);
+        System.out.println("Nearby rides: " +
+                nearby.stream().map(Ride::getRideId).toList());
+
+        // Eve books
+        Booking b = svc.bookNearest(eve.getPersonId());
+        System.out.println("Eve booked: " + b.getBookingId() +
+                " on ride " + b.getRide().getRideId());
+
+        // History
+        svc.getHistory(eve.getPersonId())
+                .forEach(h -> System.out.println("  " + h.getBookingId() +
+                        " @ " + h.getTimestamp()));
+
+        // Cancel
+        svc.cancelBooking(b.getBookingId());
+        System.out.println("After cancellation, history size: " +
+                svc.getHistory(eve.getPersonId()).size());
     }
 }
