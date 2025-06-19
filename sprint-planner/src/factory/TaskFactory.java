@@ -6,7 +6,7 @@ import utils.Constants;
 import utils.IdGenerator;
 
 import java.time.LocalDate;
-import java.util.UUID;
+
 
 public class TaskFactory {
     public static Task create(Constants.TaskType type, String title, User a, LocalDate due){

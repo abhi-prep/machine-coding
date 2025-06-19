@@ -28,6 +28,7 @@ Due to time constraints, **you are not expected to implement everything end-to-e
 - Make sure after your code is complete, you go through each line and ask yourself if it can be improved or simplified to be more production grade.
 - Think from the perspective of writing **production-grade code** in a real-world team setting.
 - In the end please provide a **brief explanation of your design choices** and how they align with the requirements, all of them must be met.
+- You dont need to take input from the user, you can hardcode the values in the main method to demonstrate the core functionalities.
 
 ### Problem Statement:
 
