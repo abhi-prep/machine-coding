@@ -22,7 +22,14 @@ public class TableCronFormatterServiceTest {
         commandHandler = new StandardCommandHandler();
         formatterService = new TableCronFormatterService(commandHandler);
 
-        cronExpression = new CronExpression();
+        cronExpression = new CronExpression(
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                new Command.Builder("/usr/bin/find").build()
+        );
         cronExpression.setMinutes(Arrays.asList(0,15,30,45));
         cronExpression.setHours(List.of(0));
         cronExpression.setDaysOfMonth(Arrays.asList(1,15));
@@ -53,13 +60,14 @@ public class TableCronFormatterServiceTest {
 
     @Test
     void testFormatWithEmptyLists(){
-        CronExpression emptyExpression = new CronExpression();
-        emptyExpression.setMinutes(List.of());
-        emptyExpression.setHours(List.of());
-        emptyExpression.setDaysOfMonth(List.of());
-        emptyExpression.setMonths(List.of());
-        emptyExpression.setDaysOfWeek(List.of());
-        emptyExpression.setCommand(new Command.Builder("/usr/bin/find").build());
+        CronExpression emptyExpression = new CronExpression(
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                new Command.Builder("/usr/bin/find").build()
+        );
 
         String expectedOutput =
                 "minute         \n" +

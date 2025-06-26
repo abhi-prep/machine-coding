@@ -1,6 +1,7 @@
 package controller;
 
 import exception.CronParseException;
+import model.Command;
 import model.CronExpression;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,6 +14,7 @@ import service.CronParserService;
 import util.OccurrenceFormatter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -41,7 +43,14 @@ public class CronParserControllerTest {
     @Test
     void testProcessCronExpression(){
         String cronExpressionString = "*/15 0 1,15 * 1-5 /usr/bin/find";
-        CronExpression mockCronExpression = new CronExpression();
+        CronExpression mockCronExpression = new CronExpression(
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                new Command.Builder("/usr/bin/find").build()
+        );
         String expectedOutput = "formatted output";
 
         when(parserService.parse(cronExpressionString)).thenReturn(mockCronExpression);
@@ -72,7 +81,14 @@ public class CronParserControllerTest {
         String formattedOutput = "formated next n occurrences";
         LocalDateTime startTime = LocalDateTime.now();
 
-        CronExpression mockCronExpression = new CronExpression();
+        CronExpression mockCronExpression = new CronExpression(
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                List.of(),
+                new Command.Builder("/usr/bin/find").build()
+        );
         when(parserService.parse(cronExpressionString)).thenReturn(mockCronExpression);
 
         MockedStatic<OccurrenceFormatter> occurrenceFormatter = mockStatic(OccurrenceFormatter.class);

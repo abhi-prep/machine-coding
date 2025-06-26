@@ -10,6 +10,7 @@ import util.Constants;
 import util.Utils;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class StandardCronParserService implements CronParserService {
 
@@ -45,35 +46,38 @@ public class StandardCronParserService implements CronParserService {
             throw new CronParseException("Invalid cron expression format: " + cronExpressionString);
         }
 
-        CronExpression cronExpression = new CronExpression();
+        CronExpression cronExpression;
         try {
             // Parse minutes
-            cronExpression.setMinutes(
-                    fieldParser.parse(tokens[0].trim(), MIN_MINUTE, MAX_MINUTE, Constants.FieldType.MINUTE));
-
-            // Parse hours
-            cronExpression.setHours(fieldParser.parse(tokens[1].trim(), MIN_HOUR, MAX_HOUR, Constants.FieldType.HOUR));
-
-            // Parse day of month
-            cronExpression.setDaysOfMonth(fieldParser.parse(tokens[2].trim(), MIN_DAY_OF_MONTH, MAX_DAY_OF_MONTH,
-                    Constants.FieldType.DAY_OF_MONTH));
-
-            // Parse months
-            cronExpression
-                    .setMonths(fieldParser.parse(tokens[3].trim(), MIN_MONTH, MAX_MONTH, Constants.FieldType.MONTH));
-
-            // Parse day of week
-            cronExpression.setDaysOfWeek(fieldParser.parse(tokens[4].trim(), MIN_DAY_OF_WEEK, MAX_DAY_OF_WEEK,
-                    Constants.FieldType.DAY_OF_WEEK));
-
-            // Parse year
+            List<Integer> minutes = fieldParser.parse(tokens[0].trim(), MIN_MINUTE, MAX_MINUTE, Constants.FieldType.MINUTE);
+            List<Integer> hours = fieldParser.parse(tokens[1].trim(), MIN_HOUR, MAX_HOUR, Constants.FieldType.HOUR);
+            List<Integer> dayOfMonth = fieldParser.parse(tokens[2].trim(), MIN_DAY_OF_MONTH, MAX_DAY_OF_MONTH,
+                    Constants.FieldType.DAY_OF_MONTH);
+            List<Integer> months = fieldParser.parse(tokens[3].trim(), MIN_MONTH, MAX_MONTH, Constants.FieldType.MONTH);
+            List<Integer> dayOfWeek = fieldParser.parse(tokens[4].trim(), MIN_DAY_OF_WEEK, MAX_DAY_OF_WEEK,
+                    Constants.FieldType.DAY_OF_WEEK);
             if (Utils.isValidYear(tokens[5].trim())) {
-                cronExpression
-                        .setYears(fieldParser.parse(tokens[5].trim(), MIN_YEAR, MAX_YEAR, Constants.FieldType.YEAR));
-                cronExpression.setCommand(commandHandler.parse(String.join(" ", Arrays.copyOfRange(tokens, 6, tokens.length))));
+                List<Integer> years = fieldParser.parse(tokens[5].trim(), MIN_YEAR, MAX_YEAR, Constants.FieldType.YEAR);
+                Command command = commandHandler.parse(String.join(" ", Arrays.copyOfRange(tokens, 6, tokens.length)));
+                cronExpression = new CronExpression(
+                        minutes,
+                        hours,
+                        dayOfMonth,
+                        months,
+                        dayOfWeek,
+                        command
+                );
+                cronExpression.setYears(years);
             } else {
                 Command command = commandHandler.parse(String.join(" ", Arrays.copyOfRange(tokens, 5, tokens.length)));
-                cronExpression.setCommand(command);
+                cronExpression = new CronExpression(
+                        minutes,
+                        hours,
+                        dayOfMonth,
+                        months,
+                        dayOfWeek,
+                        command
+                );
             }
 
         } catch (CronParseException e) {

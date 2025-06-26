@@ -14,7 +14,20 @@ public class CronExpression {
     private List<Integer> years; // Optional year field
     private Command command;
 
-    public CronExpression() {
+    public CronExpression(
+            List<Integer> minutes,
+            List<Integer> hours,
+            List<Integer> daysOfMonth,
+            List<Integer> months,
+            List<Integer> daysOfWeek,
+            Command command
+    ) {
+        this.minutes = minutes;
+        this.hours = hours;
+        this.daysOfMonth = daysOfMonth;
+        this.months = months;
+        this.daysOfWeek = daysOfWeek;
+        this.command = command;
     }
 
     public List<Integer> getMinutes() {
